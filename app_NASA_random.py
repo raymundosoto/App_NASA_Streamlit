@@ -89,7 +89,7 @@ st.text("Oprime el botón para ver la magia del universo ante tus ojos")
 boton = st.button("Ver la magia del universo")
 
 st.sidebar.title("Ve las imágenes en nuestro canal de Telegram")
-url = 'https://google.com.com'
+url = 'https://t.me/imagenes_NASA'
 
 st.sidebar.markdown(f'''
 <a href={url}><button style="back+6
