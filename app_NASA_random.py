@@ -4,7 +4,7 @@ import random
 from pprint import PrettyPrinter
 import streamlit as st
 import os
-import config
+
 
 
 
