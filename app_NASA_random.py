@@ -10,7 +10,7 @@ import config
 
 
 # Asumiendo que ya tienes definida tu variable api_key
-api_key = config.api_key
+api_key = os.environ["API_KEY"]
 pp = PrettyPrinter()
 
 import os
