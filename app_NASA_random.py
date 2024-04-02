@@ -76,7 +76,7 @@ def fetchAPOD(random_date=False):
             print('No se pudo descargar la imagen')
     else:
         print('No se encontró una URL de imagen en la respuesta')
-    return response, filename
+   
 
 # Para obtener una imagen de una fecha específica (2020-01-22)
 # fetchAPOD()
