@@ -4,24 +4,28 @@ import random
 from pprint import PrettyPrinter
 import streamlit as st
 import os
+import config
+
 
 
 
 # Asumiendo que ya tienes definida tu variable api_key
-api_key = 'XRBEsdQBfc8lSCkfnW1mWZdBgx0f3M5LNEsntUGM'
+api_key = config.api_key
 pp = PrettyPrinter()
 
-def delete_jpg_files():
+import os
+
+def delete_image_files():
     # Obtener la lista de todos los archivos en el directorio actual
     files_in_directory = os.listdir()
-    # Filtrar la lista para incluir sólo archivos que terminen en '.jpg'
-    jpg_files = [file for file in files_in_directory if file.endswith('.jpg')]
+    # Filtrar la lista para incluir sólo archivos que terminen en las extensiones especificadas
+    image_files = [file for file in files_in_directory if file.endswith(('.jpg', '.jpeg', '.gif', '.png'))]
     
     # Contador de archivos eliminados
     deleted_files_count = 0
 
-    # Recorrer la lista de archivos jpg y eliminarlos
-    for file in jpg_files:
+    # Recorrer la lista de archivos de imagen y eliminarlos
+    for file in image_files:
         try:
             os.remove(file)
             print(f'Archivo eliminado: {file}')
@@ -31,9 +35,11 @@ def delete_jpg_files():
     
     # Informar al usuario el número de archivos eliminados
     if deleted_files_count == 0:
-        print("No se encontraron archivos .jpg para eliminar.")
+        print("No se encontraron archivos de imagen para eliminar.")
     else:
-        print(f"Total de archivos .jpg eliminados: {deleted_files_count}")
+        print(f"Total de archivos de imagen eliminados: {deleted_files_count}")
+
+
 
 def fetchAPOD(random_date=False):
     URL_APOD = "https://api.nasa.gov/planetary/apod"
@@ -80,15 +86,33 @@ def fetchAPOD(random_date=False):
 
 st.header("App de imágenes de la NASA")
 st.text("Oprime el botón para ver la magia")
-boton = st.button("Ver la magia")
+boton = st.button("Ver la magia del universo")
+st.sidebar.title("Ve las imágenes en nuestro canal de Telegram")
+url = 'https://google.com.com'
 
-print(boton)
+st.sidebar.markdown(f'''
+<a href={url}><button style="back+6
+.13ground-color:GreenYellow;">Unete a canal de telegram</button></a>
+''',
+unsafe_allow_html=True)
+
+
 
 if boton:
+    # Llamar a la función
+    delete_image_files()
     respuesta, archivo=fetchAPOD(random_date=True)
+    print(archivo)
     st.image(str(archivo), caption=respuesta['title'])
+    
+    with open(archivo, "rb") as file:
+        btn = st.download_button(
+            label="Descargar imagen",
+            data=file,
+            file_name=archivo
+          )
     st.text("Datos de la imagen")
     st.json(respuesta)
-    delete_jpg_files()
+    
     
     
