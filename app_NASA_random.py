@@ -85,8 +85,9 @@ def fetchAPOD(random_date=False):
 
 
 st.header("App de imágenes de la NASA")
-st.text("Oprime el botón para ver la magia")
+st.text("Oprime el botón para ver la magia del universo ante tus ojos")
 boton = st.button("Ver la magia del universo")
+
 st.sidebar.title("Ve las imágenes en nuestro canal de Telegram")
 url = 'https://google.com.com'
 
@@ -104,6 +105,7 @@ if boton:
     respuesta, archivo=fetchAPOD(random_date=True)
     print(archivo)
     st.image(str(archivo), caption=respuesta['title'])
+    st.text("Si descargas la imagen se reinicia la app")
     
     with open(archivo, "rb") as file:
         btn = st.download_button(
